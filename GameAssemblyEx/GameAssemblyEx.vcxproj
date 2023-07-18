@@ -142,8 +142,9 @@
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="il2cpp.h" />
-    <ClInclude Include="Il2cppLib.h" />
+    <ClInclude Include="Il2cpp\il2cpp.h" />
+    <ClInclude Include="Il2cpp\Il2cppInclude.h" />
+    <ClInclude Include="Il2cpp\Il2cppLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

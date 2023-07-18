@@ -1,25 +1,23 @@
-#include <iostream>
-#include <Windows.h>
-#include <string>
-#include <vector>
-#include "Il2cppLib.h"
+#include "Il2cpp/Il2cppInclude.h"
 
 void Main() {
 	il2cpp_header_init();
 	il2cpp_header_AllocConsole();
 
 	auto domain = Domain::get_main();
-	auto UnityCoreModule_img = domain->OpenAssembly("UnityEngine.CoreModule.dll")->GetImage();
-	auto UnityEngine_Camera_c = UnityCoreModule_img->GetClassFromName("UnityEngine", "Camera");
-	auto Camera_get_main_mthd = UnityEngine_Camera_c->GetMethodFromName("get_main", 0);
-
-	Object* camera = Camera_get_main_mthd->Invoke<Object*>(NULL, { });
-	std::cout << "Camera: 0x" << std::hex << camera << '\n';
-
-
-
-
-
+	auto _thread = Thread::Attach(domain);
+	try 
+	{
+		for (Assembly* assembly : domain->GetAssemblies()) {
+			std::cout << assembly->GetImage()->GetFilename() << '\n';
+		}
+	}
+	catch(Exception* ex)
+	{
+		std::cout << "ERROR: " << ex->ReadMessage() << '\n';
+	}
+	_thread->Detatch();
+	return;
 }
 
 
